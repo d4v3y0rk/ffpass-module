@@ -1,0 +1,23 @@
+{
+  "name": "ffpass",
+  "version": "1.0.0",
+  "description": "Interact with your FordPass enabled vehicle with JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d4v3y0rk/ffpass-module.git"
+  },
+  "author": "Dave York <dave.york@me.com> (https://d4v3y0rk.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/d4v3y0rk/ffpass-module/issues"
+  },
+  "homepage": "https://github.com/d4v3y0rk/ffpass-module#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "querystring": "^0.2.0"
+  }
+}
