@@ -20,3 +20,7 @@ async function main() {
 }
 main()
 ```
+
+## More Examples
+
+A fully functional implementation of the usage of this module can be found here: [ffpass](https://github.com/d4v3y0rk/ffpass)
