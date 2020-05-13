@@ -6,7 +6,7 @@ This module will allow you to control a FordPass Enabled vehicle from your javas
 
 `npm install ffpass --save`
 
-```jacascript
+```javascript
 const fordApi = require('ffpass')
 const car = new fordApi.vehicle(process.env.FORD_USERNAME, process.env.FORD_PASSWORD, process.env.VIN)
 
