@@ -45,7 +45,7 @@ class vehicle {
             fordHeaders.set('auth-token', this.token)
             var options = {
                 baseURL: fordAPIUrl,
-                url: `/api/vehicles/v4/${vin}/status`,
+                url: `/api/vehicles/v4/${this.vin}/status`,
                 headers: Object.fromEntries(fordHeaders),
                 params: {
                     "lrdt": "01-01-1970 00:00:00"
@@ -67,16 +67,16 @@ class vehicle {
             var url = ""
             if (command == 'start') {
                 method = 'PUT'
-                url = `api/vehicles/v2/${vin}/engine/start`
+                url = `api/vehicles/v2/${this.vin}/engine/start`
             } else if (command == 'stop') {
                 method = 'DELETE'
-                url = `api/vehicles/v2/${vin}/engine/start`
+                url = `api/vehicles/v2/${this.vin}/engine/start`
             } else if (command == 'lock') {
                 method = 'PUT'
-                url = `api/vehicles/v2/${vin}/doors/lock`
+                url = `api/vehicles/v2/${this.vin}/doors/lock`
             } else if (command == 'unlock') {
                 method = 'DELETE'
-                url = `api/vehicles/v2/${vin}/doors/lock`
+                url = `api/vehicles/v2/${this.vin}/doors/lock`
             } else {
                 reject('No command specified for issueCommand!')
             }
@@ -99,9 +99,9 @@ class vehicle {
         return new Promise(async (resolve, reject) => {
             var url = ""
             if (command == 'start' || command == 'stop') {
-                url = `api/vehicles/v2/${vin}/engine/start/${commandId}`
+                url = `api/vehicles/v2/${this.vin}/engine/start/${commandId}`
             } else if (command == 'lock' || command == 'unlock') {
-                url = `api/vehicles/v2/${vin}/doors/lock/${commandId}`
+                url = `api/vehicles/v2/${this.vin}/doors/lock/${commandId}`
             } else {
                 reject('no command specified for commandStatus')
             }
