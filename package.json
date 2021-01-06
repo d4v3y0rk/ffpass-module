@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/d4v3y0rk/ffpass-module#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "querystring": "^0.2.0"
   }
 }
