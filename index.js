@@ -1,6 +1,11 @@
 const request = require('axios')
 const qs = require('querystring')
 
+// https://github.com/axios/axios/issues/41#issuecomment-484546457
+// By default, axios throws errors for http request.status < 200 || request.status >= 300
+// This makes sure that it does not treat said status codes as errors = rejects the promise
+request.defaults.validateStatus = function () { return true; };
+
 const { fordHeaders, iamHeaders} = require('./fordHeaders')
 
 const fordAPIUrl = 'https://usapi.cv.ford.com/'
