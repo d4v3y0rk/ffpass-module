@@ -34,7 +34,14 @@ class vehicle {
                 headers: Object.fromEntries(iamHeaders),
                 data: qs.stringify(Object.fromEntries(requestData))
             }
-            var result = await request(options)
+
+            try {
+                var result = await request(options)
+            } catch (err)  {
+                console.log(err)
+                reject(err.result.status)
+            }
+
             if (result.status == 200) {
                 this.token = result.data.access_token
                 resolve(result.data.access_token)
@@ -56,7 +63,14 @@ class vehicle {
                     "lrdt": "01-01-1970 00:00:00"
                 }
             }
-            var result = await request(options)
+
+            try {
+                var result = await request(options)
+            } catch (err) {
+                console.log(err)
+                reject(err.result.status)
+            }
+
             if (result.status == 200) {
                 resolve(result.data.vehiclestatus)
             } else {
@@ -91,7 +105,14 @@ class vehicle {
                 url: url,
                 headers: Object.fromEntries(fordHeaders),
             }
-            var result = await request(options)
+
+            try {
+                var result = await request(options)
+            } catch (err) {
+                console.log(err)
+                reject(err.result.status)
+            }
+
             if (result.status == 200) {
                 resolve(result.data)
             } else {
@@ -116,7 +137,14 @@ class vehicle {
                 url: url,
                 headers: Object.fromEntries(fordHeaders),
             }
-            var result = await request(options)
+
+            try {
+                var result = await request(options)
+            } catch (err) {
+                console.log(err)
+                reject(err.result.status)
+            }
+
             if (result.status == 200) {
                 resolve(result.data.status)
             } else {
