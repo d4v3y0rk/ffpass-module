@@ -1,6 +1,11 @@
 const request = require('axios')
 const qs = require('querystring')
 
+// https://github.com/axios/axios/issues/41#issuecomment-484546457
+// By default, axios throws errors for http request.status < 200 || request.status >= 300
+// This makes sure that it does not treat said status codes as errors = rejects the promise
+request.defaults.validateStatus = function () { return true; };
+
 const { fordHeaders, iamHeaders} = require('./fordHeaders')
 
 const fordAPIUrl = 'https://usapi.cv.ford.com/'
@@ -29,7 +34,14 @@ class vehicle {
                 headers: Object.fromEntries(iamHeaders),
                 data: qs.stringify(Object.fromEntries(requestData))
             }
-            var result = await request(options)
+
+            try {
+                var result = await request(options)
+            } catch (err)  {
+                console.log(err)
+                reject(err.result.status)
+            }
+
             if (result.status == 200) {
                 this.token = result.data.access_token
                 resolve(result.data.access_token)
@@ -51,7 +63,14 @@ class vehicle {
                     "lrdt": "01-01-1970 00:00:00"
                 }
             }
-            var result = await request(options)
+
+            try {
+                var result = await request(options)
+            } catch (err) {
+                console.log(err)
+                reject(err.result.status)
+            }
+
             if (result.status == 200) {
                 resolve(result.data.vehiclestatus)
             } else {
@@ -86,7 +105,14 @@ class vehicle {
                 url: url,
                 headers: Object.fromEntries(fordHeaders),
             }
-            var result = await request(options)
+
+            try {
+                var result = await request(options)
+            } catch (err) {
+                console.log(err)
+                reject(err.result.status)
+            }
+
             if (result.status == 200) {
                 resolve(result.data)
             } else {
@@ -111,7 +137,14 @@ class vehicle {
                 url: url,
                 headers: Object.fromEntries(fordHeaders),
             }
-            var result = await request(options)
+
+            try {
+                var result = await request(options)
+            } catch (err) {
+                console.log(err)
+                reject(err.result.status)
+            }
+
             if (result.status == 200) {
                 resolve(result.data.status)
             } else {
