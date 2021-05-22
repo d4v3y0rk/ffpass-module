@@ -142,13 +142,43 @@ class vehicle {
                 var result = await request(options)
             } catch (err) {
                 console.log(err)
+                return reject(err.result.status)
+            }
+
+            if (result.status == 200) {
+                return resolve(result.data.status)
+            } else {
+                return reject(result.status)
+            }
+        })
+    }
+
+    /**
+     * Requests the Ford API to contact the vehicle for updated status data
+     * Does not wait until the refreshed status data is available! Use requestStatusRefreshSync for that.
+     * @returns commandId to track the request
+     */
+    requestStatusRefresh() {
+        return new Promise(async (resolve, reject) => {
+            fordHeaders.set('auth-token', this.token)
+            var options = {
+                method: 'PUT',
+                baseURL: fordAPIUrl,
+                url: `/api/vehicles/v2/${this.vin}/status`,
+                headers: Object.fromEntries(fordHeaders)
+            }
+
+            try {
+                var result = await request(options)
+            } catch (err) {
+                console.log(err)
                 reject(err.result.status)
             }
 
             if (result.status == 200) {
-                resolve(result.data.status)
+                return resolve(result.data.commandId)
             } else {
-                reject(result.status)
+                return reject(result.status)
             }
         })
     }
