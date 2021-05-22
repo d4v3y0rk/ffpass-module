@@ -17,6 +17,7 @@ class vehicle {
         this.password = password,
         this.vin = vin,
         this.token = "",
+        this.outdatedAfterSeconds = 5 * 60,
         this.maxRefreshTrials = 20
     }
 
@@ -73,7 +74,20 @@ class vehicle {
             }
 
             if (result.status == 200) {
-                resolve(result.data.vehiclestatus)
+                // Check if the last update timestamp is too old
+                // The lastRefresh timestamp is given in UTC. In order to parse the unix time correctly
+                // We must add a "Z" so that it gets parsed as UTC
+                var vehicleStatus = result.data.vehiclestatus
+                var lastUpdate = Date.parse(vehicleStatus.lastRefresh + "Z")
+                var dateNow = Date.now()
+                var diffInSeconds = (dateNow - lastUpdate) / 1000
+
+                if (diffInSeconds > this.outdatedAfterSeconds) {
+                    console.log("Updating status!")
+                    vehicleStatus = await this.requestStatusRefreshSync()
+                }
+
+                return resolve(vehicleStatus)
             } else {
                 return reject(result.status)
             }
