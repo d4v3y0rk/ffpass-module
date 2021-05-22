@@ -16,7 +16,8 @@ class vehicle {
         this.username = username,
         this.password = password,
         this.vin = vin,
-        this.token = ""
+        this.token = "",
+        this.maxRefreshTrials = 20
     }
 
     auth() {
@@ -150,6 +151,43 @@ class vehicle {
             } else {
                 return reject(result.status)
             }
+        })
+    }
+
+    /**
+     * Requests the Ford API to contact the vehicle for updated status data
+     * Promise only resolves after the status was updated, an error occurred or 20 trials without success passed
+     * @returns updated status  
+     */
+    requestStatusRefreshSync() {
+        return new Promise(async (resolve, reject) => {
+            var maxRefreshTrials = 20
+            var commandId = await this.requestStatusRefresh()
+            fordHeaders.set('auth-token', this.token)
+            var options = {
+                baseURL: fordAPIUrl,
+                url: `/api/vehicles/v3/${this.vin}/statusrefresh/${commandId}`,
+                headers: Object.fromEntries(fordHeaders)
+            }
+
+            var api_status = 0;
+            for (let counter = 0; counter < this.maxRefreshTrials; counter++) {                
+                try {
+                    var result = await request(options)
+                    api_status = result.data.status
+                } catch (err) {
+                    console.log(err)
+                }
+
+                if (api_status == 200) {
+                    return resolve(result.data.vehicleStatus)
+                } else {
+                    console.log(`Waiting for the status to refresh - sleeping for 1500ms - ${result.data.status}`)
+                    await new Promise((resolve_sleep) => {setTimeout(resolve_sleep, 1500);});
+                }
+            }
+            
+            reject("Refresh failed!")
         })
     }
 
