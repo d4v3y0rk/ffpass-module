@@ -8,8 +8,8 @@ request.defaults.validateStatus = function () { return true; };
 
 const { fordHeaders, iamHeaders} = require('./fordHeaders')
 
-const fordAPIUrl = 'https://usapi.cv.ford.com/'
-const authUrl = 'https://fcis.ice.ibmcloud.com/'
+const fordAPIUrl = 'https://usapi.cv.ford.com'
+const authUrl = 'https://fcis.ice.ibmcloud.com'
 
 class vehicle {
     constructor(username, password, vin) {
@@ -31,7 +31,7 @@ class vehicle {
             var options = {
                 method: 'POST',
                 baseURL: authUrl,
-                url: 'v1.0/endpoint/default/token',
+                url: '/v1.0/endpoint/default/token',
                 headers: Object.fromEntries(iamHeaders),
                 data: qs.stringify(Object.fromEntries(requestData))
             }
@@ -87,16 +87,16 @@ class vehicle {
             var url = ""
             if (command == 'start') {
                 method = 'PUT'
-                url = `api/vehicles/v2/${this.vin}/engine/start`
+                url = `/api/vehicles/v2/${this.vin}/engine/start`
             } else if (command == 'stop') {
                 method = 'DELETE'
-                url = `api/vehicles/v2/${this.vin}/engine/start`
+                url = `/api/vehicles/v2/${this.vin}/engine/start`
             } else if (command == 'lock') {
                 method = 'PUT'
-                url = `api/vehicles/v2/${this.vin}/doors/lock`
+                url = `/api/vehicles/v2/${this.vin}/doors/lock`
             } else if (command == 'unlock') {
                 method = 'DELETE'
-                url = `api/vehicles/v2/${this.vin}/doors/lock`
+                url = `/api/vehicles/v2/${this.vin}/doors/lock`
             } else {
                 reject('No command specified for issueCommand!')
             }
@@ -126,9 +126,9 @@ class vehicle {
         return new Promise(async (resolve, reject) => {
             var url = ""
             if (command == 'start' || command == 'stop') {
-                url = `api/vehicles/v2/${this.vin}/engine/start/${commandId}`
+                url = `/api/vehicles/v2/${this.vin}/engine/start/${commandId}`
             } else if (command == 'lock' || command == 'unlock') {
-                url = `api/vehicles/v2/${this.vin}/doors/lock/${commandId}`
+                url = `/api/vehicles/v2/${this.vin}/doors/lock/${commandId}`
             } else {
                 reject('no command specified for commandStatus')
             }
