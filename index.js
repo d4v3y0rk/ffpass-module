@@ -69,13 +69,13 @@ class vehicle {
                 var result = await request(options)
             } catch (err) {
                 console.log(err)
-                reject(err.result.status)
+                return reject(err.result.status)
             }
 
             if (result.status == 200) {
                 resolve(result.data.vehiclestatus)
             } else {
-                reject(result.status)
+                return reject(result.status)
             }
         })
     }
@@ -98,7 +98,7 @@ class vehicle {
                 method = 'DELETE'
                 url = `/api/vehicles/v2/${this.vin}/doors/lock`
             } else {
-                reject('No command specified for issueCommand!')
+                return reject('No command specified for issueCommand!')
             }
             var options = {
                 method: method,
@@ -111,13 +111,13 @@ class vehicle {
                 var result = await request(options)
             } catch (err) {
                 console.log(err)
-                reject(err.result.status)
+                return reject(err.result.status)
             }
 
             if (result.status == 200) {
-                resolve(result.data)
+                return resolve(result.data)
             } else {
-                reject(result.status)
+                return reject(result.status)
             }
         })
     }
@@ -130,7 +130,7 @@ class vehicle {
             } else if (command == 'lock' || command == 'unlock') {
                 url = `/api/vehicles/v2/${this.vin}/doors/lock/${commandId}`
             } else {
-                reject('no command specified for commandStatus')
+                return reject('no command specified for commandStatus')
             }
             fordHeaders.set('auth-token', this.token)
             var options = {
