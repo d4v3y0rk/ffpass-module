@@ -175,7 +175,6 @@ class vehicle {
      */
     requestStatusRefreshSync() {
         return new Promise(async (resolve, reject) => {
-            var maxRefreshTrials = 20
             var commandId = await this.requestStatusRefresh()
             fordHeaders.set('auth-token', this.token)
             var options = {
