@@ -9,7 +9,7 @@ request.defaults.validateStatus = function () { return true; };
 const { fordHeaders, iamHeaders} = require('./fordHeaders')
 
 const fordAPIUrl = 'https://usapi.cv.ford.com'
-const authUrl = 'https://fcis.ice.ibmcloud.com'
+const authUrl = 'https://sso.ci.ford.com'
 
 class vehicle {
     constructor(username, password, vin) {
