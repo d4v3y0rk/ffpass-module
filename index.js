@@ -10,6 +10,7 @@ const { fordHeaders, iamHeaders} = require('./fordHeaders')
 
 const fordAPIUrl = 'https://usapi.cv.ford.com'
 const authUrl = 'https://sso.ci.ford.com'
+const tokenUrl = "https://api.mps.ford.com"
 
 class vehicle {
     constructor(username, password, vin) {
@@ -45,8 +46,23 @@ class vehicle {
             }
 
             if (result.status == 200) {
-                this.token = result.data.access_token
-                resolve(result.data.access_token)
+                var tokenOptions = {
+                    method: 'PUT',
+                    baseURL: tokenUrl,
+                    url: '/api/oauth2/v1/token',
+                    headers: Object.fromEntries(fordHeaders),
+                    data: { code: result.data.access_token }
+                }
+                console.log(tokenOptions)
+                try {
+                    var tokenResult = await request(tokenOptions)
+                    console.log(tokenResult.data)
+                } catch (err)  {
+                    console.log(err)
+                    reject(err.result.status)
+                }
+                this.token = tokenResult.data.access_token
+                resolve(tokenResult.data.access_token)
             } else {
                 console.log(result)
                 reject(result.status)
