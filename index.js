@@ -60,6 +60,7 @@ class vehicle {
                 } catch (err)  {
                     console.log(err)
                     reject(err.result.status)
+                    return
                 }
                 if (tokenResult.status != 200) {
                     console.log(tokenResult)
