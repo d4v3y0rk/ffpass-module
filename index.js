@@ -61,6 +61,11 @@ class vehicle {
                     console.log(err)
                     reject(err.result.status)
                 }
+                if (tokenResult.status != 200) {
+                    console.log(tokenResult)
+                    reject(tokenResult.status)
+                    return
+                }
                 this.token = tokenResult.data.access_token
                 resolve(tokenResult.data.access_token)
             } else {
