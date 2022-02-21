@@ -3,7 +3,7 @@ const defaultHeaders = new Map([
     ['Accept', '*/*'],
     ['Accept-Language', 'en-us'],
     ['Content-Type', 'application/json'],
-    ['User-Agent', 'fordpass-na/353 CFNetwork/1121.2.2 Darwin/19.3.0'],
+    ['User-Agent', 'FordPass/5 CFNetwork/1327.0.4 Darwin/21.2.0'],
     ['Accept-Encoding', 'gzip, deflate, br']
 ])
 
