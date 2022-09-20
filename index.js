@@ -314,7 +314,7 @@ class vehicle {
             }
 
             var api_status = 0;
-            for (let counter = 0; counter < this.maxRefreshTrials; counter++) {                
+            for (let counter = 0; counter < this.maxRefreshTrials; counter++) {
                 try {
                     var result = await request(options)
                     api_status = result.data.status
@@ -323,7 +323,7 @@ class vehicle {
                 }
 
                 if (api_status == 200) {
-                    return resolve(result.data.vehicleStatus)
+                    return resolve(result.data.vehiclestatus)
                 } else {
                     console.log(`Waiting for the status to refresh - sleeping for 1500ms - ${result.data.status}`)
                     await new Promise((resolve_sleep) => {setTimeout(resolve_sleep, 1500);});
