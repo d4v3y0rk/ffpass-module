@@ -106,7 +106,7 @@ class vehicle {
             throw new Error('Attempt Login: Unhandled success status code');
           })
           .catch(err => {
-            if (err?.response?.status === 302) {
+            if (err.response.status === 302) {
                 return err.response.headers.location;
             }
             throw new Error('Attempt Login: Unhandled Error Code');
