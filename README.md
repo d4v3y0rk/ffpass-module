@@ -1,6 +1,10 @@
 # FFPass NPM module
+[![npm](https://img.shields.io/npm/v/ffpass)](https://www.npmjs.com/package/ffpass)
+[![build](https://github.com/d4v3y0rk/ffpass-module/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/d4v3y0rk/ffpass-module/actions/workflows/npm-publish.yml)
 
-This module will allow you to control a FordPass Enabled vehicle from your javascript code. 
+This module will allow you to control a FordPass Enabled vehicle from your javascript code.
+It requires a node version >=14.
+
 
 ## Usage 
 

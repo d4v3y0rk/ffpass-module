@@ -16,6 +16,9 @@
     "url": "https://github.com/d4v3y0rk/ffpass-module/issues"
   },
   "homepage": "https://github.com/d4v3y0rk/ffpass-module#readme",
+  "engines" : {
+    "node" : ">=14.0.0 <15.0.0 || >=16.0.0"
+  },
   "dependencies": {
     "axios": "^0.21.2",
     "axios-cookiejar-support": "^4.0.3",
