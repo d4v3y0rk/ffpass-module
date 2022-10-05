@@ -1,6 +1,6 @@
 {
   "name": "ffpass",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Interact with your FordPass enabled vehicle with JavaScript",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,8 @@
   "homepage": "https://github.com/d4v3y0rk/ffpass-module#readme",
   "dependencies": {
     "axios": "^0.21.2",
-    "querystring": "^0.2.0"
+    "axios-cookiejar-support": "^4.0.3",
+    "pkce-challenge": "^3.0.0",
+    "tough-cookie": "^4.1.2"
   }
 }
