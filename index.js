@@ -214,7 +214,12 @@ class vehicle {
 
                 if (diffInSeconds > this.outdatedAfterSeconds) {
                     console.log("Updating status!")
-                    vehicleStatus = await this.requestStatusRefreshSync()
+                    try {
+                        vehicleStatus = await this.requestStatusRefreshSync()
+                    } catch (err) {
+                        console.log(err)
+                        return reject(err)
+                    }
                 }
 
                 return resolve(vehicleStatus)
